@@ -120,7 +120,7 @@ func (g *ProfanityDetector) IsProfane(s string) bool {
 // ExtractProfanity takes in a string (word or sentence) and look for profanities.
 // Returns the first profanity found, or an empty string if none are found
 func (g *ProfanityDetector) ExtractProfanity(s string) string {
-	return g.ExtractProfanityS(g.Sanitize(s))
+	return g.ExtractProfanityFromSanitizedString(g.Sanitize(s))
 }
 
 func (g *ProfanityDetector) Sanitize(s string) SanitizedString {
@@ -128,7 +128,7 @@ func (g *ProfanityDetector) Sanitize(s string) SanitizedString {
 	return SanitizedString(sanitized)
 }
 
-func (g *ProfanityDetector) ExtractProfanityS(sanitized SanitizedString) string {
+func (g *ProfanityDetector) ExtractProfanityFromSanitizedString(sanitized SanitizedString) string {
 	s := string(sanitized)
 	// Check for false negatives
 	for _, word := range g.falseNegatives {
