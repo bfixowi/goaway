@@ -19,6 +19,8 @@ var (
 	defaultProfanityDetector *ProfanityDetector
 )
 
+type SanitizedString string
+
 // ProfanityDetector contains the dictionaries as well as the configuration
 // for determining how profanity detection is handled
 type ProfanityDetector struct {
@@ -118,7 +120,16 @@ func (g *ProfanityDetector) IsProfane(s string) bool {
 // ExtractProfanity takes in a string (word or sentence) and look for profanities.
 // Returns the first profanity found, or an empty string if none are found
 func (g *ProfanityDetector) ExtractProfanity(s string) string {
-	s, _ = g.sanitize(s, false)
+	return g.ExtractProfanityS(g.Sanitize(s))
+}
+
+func (g *ProfanityDetector) Sanitize(s string) SanitizedString {
+	sanitized, _ := g.sanitize(s, false)
+	return SanitizedString(sanitized)
+}
+
+func (g *ProfanityDetector) ExtractProfanityS(sanitized SanitizedString) string {
+	s := string(sanitized)
 	// Check for false negatives
 	for _, word := range g.falseNegatives {
 		if match := strings.Contains(s, word); match {
