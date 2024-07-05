@@ -128,6 +128,10 @@ func (g *ProfanityDetector) Sanitize(s string) SanitizedString {
 	return SanitizedString(sanitized)
 }
 
+func (g *ProfanityDetector) SanitizeAccents(s string) SanitizedString {
+	return SanitizedString(removeAccents(s))
+}
+
 func (g *ProfanityDetector) ExtractProfanityFromSanitizedString(sanitized SanitizedString) string {
 	s := string(sanitized)
 	// Check for false negatives
