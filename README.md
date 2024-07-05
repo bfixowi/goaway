@@ -14,7 +14,7 @@ This library must remain **extremely** easy to use. Its original intent of not a
 
 ## Installation
 ```console
-go get -u github.com/TwiN/go-away
+go get -u github.com/bfixowi/goaway
 ```
 
 
@@ -23,7 +23,7 @@ go get -u github.com/TwiN/go-away
 package main
 
 import (
-    "github.com/TwiN/go-away"
+    "github.com/bfixowi/goaway"
 )
 
 func main() {
